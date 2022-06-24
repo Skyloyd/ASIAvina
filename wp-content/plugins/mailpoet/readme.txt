@@ -2,8 +2,8 @@
 Contributors: mailpoet
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
 Requires at least: 5.6
-Tested up to: 5.9
-Stable tag: 3.89.0
+Tested up to: 6.0
+Stable tag: 3.90.2
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,50 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 3.90.2 - 2022-06-20 =
+* Improved: tested up to WordPress 6.0;
+* Improved: when sending with MailPoet Sending Service, show a warning when unauthorized email is used in settings;
+* Fixed: correctly reset error message when sending resumes;
+* Fixed: MailPoet Marketing Opt-in block is not translated in WordPress 6;
+* Fixed: some special characters in WordPress name don't show correctly when synced to MailPoet.
+
+= 3.90.1 - 2022-06-16 =
+* Fixed: occasional error related to twig templates when updating the plugin.
+
+= 3.90.0 - 2022-06-14 =
+* Updated: js-cookie library to version 3;
+* Improved: autocomplete's accessibility for first and last name;
+* Improved: added labels to inputs in public forms to improve accessibility;
+* Improved: list badge now links to its subscribers;
+* Improved: some 3rd party plugins should no longer falsely mark MailPoet as malware;
+* Improved: checkbox and radio buttons are focusable;
+* Fixed: invalid HTML markup in rendered email;
+* Fixed: Unhandled error for inaccessible cron worker.
+
+= 3.89.4 - 2022-06-06 =
+* Improved: better handle trying to change a subscriber email to an existing one;
+* Fixed: SMTP configuration doesn't work without authentication;
+* Fixed: subscribers without orders don't show in "0 orders" segment;
+* Fixed: creating custom field can break Form editor;
+* Fixed: Google Fonts libraries loading in iframe even when 3rd-party libraries are disabled.
+
+= 3.89.3 - 2022-05-24 =
+* Added: Google reCAPTCHA v2 Invisible;
+* Improved: auto adjust the height of form's iframe;
+* Changed: mailpoet_mailer_smtp_transport_agent filter replaced with mailpoet_mailer_smtp_option;
+* Changed: replaced Swift Mailer with PHPMailer.
+
+= 3.89.2 - 2022-05-19 =
+* Fixed: form editor not opening in some cases.
+
+= 3.89.1 - 2022-05-17 =
+* Improved: performance fixes;
+* Improved: error handling when using MailPoet Sending Service;
+* Changed: removed deprecated code;
+* Changed: automatic emails can no longer be activated without an unsubscribe link when sending with MSS;
+* Fixed: remove unnecessary redirect that in some circumstances prevented displaying a form;
+* Fixed: users added via MemberPress now receive welcome emails targeted to custom roles.
 
 = 3.89.0 - 2022-05-09 =
 * Updated: Removed MailPoet Task Scheduler;

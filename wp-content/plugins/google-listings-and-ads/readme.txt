@@ -2,9 +2,9 @@
 Contributors: automattic, google, woocommerce
 Tags: woocommerce, google, listings, ads
 Requires at least: 5.7
-Tested up to: 5.9
+Tested up to: 6.0
 Requires PHP: 7.3
-Stable tag: 1.12.8
+Stable tag: 1.13.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -54,7 +54,7 @@ Create a new Google Ads account through Google Listings & Ads and a promotional 
 = Minimum Requirements =
 
 * WordPress 5.7 or greater
-* WooCommerce 5.8 or greater
+* WooCommerce 6.0 or greater
 * PHP version 7.3 or greater (PHP 7.4 or greater is recommended)
 * MySQL version 5.6 or greater
 
@@ -109,29 +109,28 @@ Yes, you can run both at the same time, and we recommend it! In the US, advertis
 
 == Changelog ==
 
-= 1.12.8 - 2022-05-05 =
-* Update - Add the FAQs card for UX improvements on get started page.
-* Update - Add the benefits card for UX improvements on get started page.
-* Update - Add the customer quotes card for UX improvements on get started page.
-* Update - Add the features card for UX improvements on get started page.
-* Update - Add the first card with a CTA and a video for UX improvements on get started page.
-* Update - Add the get started card for UX improvements on get started page.
+= 1.13.6 - 2022-06-21 =
+* Fix - Cannot disconnect Jetpack when other activated plugins are using Jetpack connection.
+* Fix - Compatibility CES prompts with WC 6.6.0.
+* Fix - Multiple CES prompts on the Dashboard Page.
 
-= 1.12.7 - 2022-05-04 =
-* Fix - Label UI for selecting countries (TreeSelectControl / SupportedCountrySelect).
-* Tweak - Refactor, remove `record*Event` utils.
-* Tweak - Upgrade @wordpress/scripts to 22.1.0, and the related packages were upgraded to the corresponding versions.
-* Tweak - Upgrade the packages of the e2e testing.
-* Tweak - Upgrade webpack config to v5, and enhance the config.
+= 1.13.5 - 2022-06-15 =
+* Fix - Avoid losing focus when selecting an option in Tree Select Control.
+* Fix - Bump node-forge from 1.2.1 to 1.3.1.
+* Tweak - Clear input search filter after selecting an option.
+* Tweak - Disable Review Request in Standalone Accounts.
+* Tweak - Update copy for Free and Enhanced Listings merge
+* Tweak - WC 6.6 compatibility.
 
-= 1.12.6 - 2022-04-29 =
-* Fix - Update all products job syncing products
+= 1.13.4 - 2022-06-07 =
+* Fix - Adding Github Actions for storybook.
+* Fix - Do not show error notice when Merchant Center review request API call failed.
+* Fix - Do not store URL matches transient until fully connected.
+* Fix - Fix GitHub Workflow paths.
+* Fix - Use commit instead of branch for storybook dependency.
+* Tweak - Always compare site URL hash without trailing slash.
+* Tweak - Compliance Policy links.
+* Tweak - WC 6.6 compatibility.
 
-= 1.12.5 - 2022-04-12 =
-* Fix - Cache Yoast SEO values per product, to ensure unique values.
-* Fix - Feature/tree select control component.
-* Fix - Prompt to reconnect when a Jetpack disconnect is detected.
-* Tweak - Automatically generate Tracking events docs from JSDoc.
-* Tweak - Move Tracking events docs to JSDoc.
 
 [See changelog for all versions](https://raw.githubusercontent.com/woocommerce/google-listings-and-ads/trunk/changelog.txt).

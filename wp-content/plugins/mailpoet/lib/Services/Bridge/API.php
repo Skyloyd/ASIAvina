@@ -18,7 +18,10 @@ class API {
 
   const RESPONSE_CODE_KEY_INVALID = 401;
   const RESPONSE_CODE_STATS_SAVED = 204;
+  const RESPONSE_CODE_INTERNAL_SERVER_ERROR = 500;
+  const RESPONSE_CODE_BAD_GATEWAY = 502;
   const RESPONSE_CODE_TEMPORARY_UNAVAILABLE = 503;
+  const RESPONSE_CODE_GATEWAY_TIMEOUT = 504;
   const RESPONSE_CODE_NOT_ARRAY = 422;
   const RESPONSE_CODE_PAYLOAD_TOO_BIG = 413;
   const RESPONSE_CODE_PAYLOAD_ERROR = 400;
@@ -36,7 +39,7 @@ class API {
   public $urlMessages = 'https://bridge.mailpoet.com/api/v0/messages';
   public $urlBounces = 'https://bridge.mailpoet.com/api/v0/bounces/search';
   public $urlStats = 'https://bridge.mailpoet.com/api/v0/stats';
-  public $urlAuthorizedEmailAddresses = 'https://bridge.mailpoet.com/api/v0/authorized_email_addresses';
+  public $urlAuthorizedEmailAddresses = 'https://bridge.mailpoet.com/api/v1/authorized_email_address';
 
   public function __construct(
     $apiKey,
@@ -166,16 +169,17 @@ class API {
     return $isSuccess;
   }
 
-  public function getAuthorizedEmailAddresses() {
+  public function getAuthorizedEmailAddresses(): ?array {
     $result = $this->request(
       $this->urlAuthorizedEmailAddresses,
       null,
       'GET'
     );
-    if ($this->wp->wpRemoteRetrieveResponseCode($result) === 200) {
-      return json_decode($this->wp->wpRemoteRetrieveBody($result), true);
+    if ($this->wp->wpRemoteRetrieveResponseCode($result) !== 200) {
+      return null;
     }
-    return false;
+    $data = json_decode($this->wp->wpRemoteRetrieveBody($result), true);
+    return is_array($data) ? $data : null;
   }
 
   public function setKey($apiKey) {

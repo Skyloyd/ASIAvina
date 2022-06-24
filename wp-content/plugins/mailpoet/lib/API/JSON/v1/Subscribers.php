@@ -7,15 +7,17 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\API\JSON\Endpoint as APIEndpoint;
 use MailPoet\API\JSON\Error as APIError;
+use MailPoet\API\JSON\ErrorResponse;
 use MailPoet\API\JSON\Response;
 use MailPoet\API\JSON\ResponseBuilders\SubscribersResponseBuilder;
+use MailPoet\API\JSON\SuccessResponse;
 use MailPoet\Config\AccessControl;
+use MailPoet\ConflictException;
 use MailPoet\Doctrine\Validator\ValidationException;
 use MailPoet\Entities\SegmentEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Exception;
 use MailPoet\Listing;
-use MailPoet\Models\Subscriber;
 use MailPoet\Segments\SegmentsRepository;
 use MailPoet\Settings\SettingsController;
 use MailPoet\Subscribers\ConfirmationEmailMailer;
@@ -117,7 +119,7 @@ class Subscribers extends APIEndpoint {
   private function preferUnsubscribedStatusFromSegment(array $subscriber, $segmentId) {
     $segmentStatus = $this->findSegmentStatus($subscriber, $segmentId);
 
-    if ($segmentStatus === Subscriber::STATUS_UNSUBSCRIBED) {
+    if ($segmentStatus === SubscriberEntity::STATUS_UNSUBSCRIBED) {
       $subscriber['status'] = $segmentStatus;
     }
     return $subscriber;
@@ -150,12 +152,21 @@ class Subscribers extends APIEndpoint {
     );
   }
 
-  public function save($data = []) {
+  /**
+   * @param array $data
+   * @return ErrorResponse|SuccessResponse
+   * @throws \Exception
+   */
+  public function save(array $data = []) {
     try {
       $subscriber = $this->saveController->save($data);
     } catch (ValidationException $validationException) {
       return $this->badRequest([$this->getErrorMessage($validationException)]);
-    }
+    } catch (ConflictException $conflictException) {
+      return $this->badRequest([
+        APIError::BAD_REQUEST => $conflictException->getMessage(),
+      ]);
+    };
 
     return $this->successResponse(
       $this->subscribersResponseBuilder->build($subscriber)
